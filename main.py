@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox, simpledialog
+from tkinter import filedialog, messagebox, simpledialog,PhotoImage
 import tkinter.font as tkFont
 import json
 import os
@@ -17,7 +17,6 @@ class SimpleNotepad:
         self.root = root
         self.root.title("Bloco de Notas")
         self.filename = None
-
         self.config = self.load_config()
         w = self.config.get("width", 800)
         h = self.config.get("height", 600)
@@ -27,6 +26,9 @@ class SimpleNotepad:
         self.font_family = self.config.get("font_family", "Consolas")
         self.theme = self.config.get("theme", "system")
         self.font = tkFont.Font(family=self.font_family, size=self.font_size)
+
+        self.root.iconphoto(False, PhotoImage(file="icon.ico"))
+        
 
         self.create_widgets()
         self.create_menus()
@@ -39,11 +41,13 @@ class SimpleNotepad:
         self.main_frame = tk.Frame(self.root)
         self.main_frame.pack(fill=tk.BOTH, expand=True)
 
+
+
         self.line_numbers = tk.Text(self.main_frame, width=4, padx=4, takefocus=0, border=0,
                                     background="#f0f0f0", state='disabled', font=self.font)
         self.line_numbers.pack(side=tk.LEFT, fill=tk.Y)
 
-        self.separator = tk.Frame(self.main_frame, width=1, bg="#a0a0a0")
+        self.separator = tk.Frame(self.main_frame, width=1, bg="#a0a0a0",)
         self.separator.pack(side=tk.LEFT, fill=tk.Y)
 
         self.text = tk.Text(self.main_frame, font=self.font, undo=True, wrap='word')
